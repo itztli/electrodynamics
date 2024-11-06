@@ -16,8 +16,8 @@ extern "C" {
 
   
   double R(double x1,double y1,double z1,double x2,double y2,double z2);
-  double F1D(double m1,double m2, double r, double u);
-  double E1D(double m2, double r, double u);
+  double F1D(double q1,double q2, double r, double u);
+  double E1D(double q2, double r, double u);
 
   vector3D U(double x1, double y1,double z1,double x2,double y2,double z2);
 

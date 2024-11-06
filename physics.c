@@ -11,17 +11,19 @@ double R(double x1,double y1,double z1,double x2,double y2,double z2){
   return result;
 }
 
-double F1D(double m1,double m2, double r, double u){
+double F1D(double q1,double q2, double r, double u){
   double result;
-  double G_gravity = 6.67430e-11; //MKS system
-  result = G_gravity*m1*m2*u/pow(r,3);
+  double k1 = 8.987551792314e9;  // N*m^2/C^2  MKS system
+  //double G_gravity = 6.67430e-11; //MKS system
+  //result = G_gravity*m1*m2*u/pow(r,3);
+  result = -k1*q1*q2*u/pow(r,3);
   return result;
 }
 
-double E1D(double m2, double r, double u){
+double E1D(double q2, double r, double u){
   double result;
-  double G_gravity = 6.67430e-11; //MKS system
-  result = G_gravity*m2*u/pow(r,3);
+  double k1 = 8.987551792314e9;  // N*m^2/C^2  MKS system
+  result = -k1*q2*u/pow(r,3);
   return result;
 }
 

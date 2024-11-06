@@ -10,13 +10,14 @@ extern "C" {
 #endif
 
   typedef struct{
-    double mass;
-    double p[3];
-    double v[3];
-    double F[3];
+    double q; //chargue
+    double m; //mass
+    double p[3]; //position
+    double v[3]; //velocity
+    double F[3]; //Force
   }Particle;
 
-  Particle new_Particle(int mass, double x, double y, double z, double vx, double vy, double vz);
+  Particle new_Particle(double q, double m, double x, double y, double z, double vx, double vy, double vz);
 
   void print_Particle(Particle particle);
   

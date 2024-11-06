@@ -18,7 +18,7 @@ Integrator new_integrator(int numeric_method, double dt){
   
 Model integrator_solve(Integrator integrator, Model model){
   int numeric_method = integrator.numeric_method;
-  double x1,y1,z1,x2,y2,z2,x3,y3,z3,m1,m2;
+  double x1,y1,z1,x2,y2,z2,x3,y3,z3,q1,q2,m1;
   double sumx,sumy,sumz;
   double dt = integrator.dt;
   double vx,vy,vz,r_ij,r;
@@ -31,6 +31,7 @@ Model integrator_solve(Integrator integrator, Model model){
     {
 
     case 0: //trapezium
+/*
       N= model.i;
       //printf("We are using the Trapezium Method %i\n",N);
       
@@ -97,20 +98,24 @@ Model integrator_solve(Integrator integrator, Model model){
 	model.backup_particles[i].p[2] =model.particles[i].p[2];
 	
       }
+*/
       break;
     
     case 1: //Riemann
 
       for (int i=0; i< model.i;i++){
-	m1 = model.particles[i].mass;
+	q1 = model.particles[i].q;
+	m1 = model.particles[i].m;
+	m1 = 1.0/m1;
 	x1 = model.particles[i].p[0];
 	y1 = model.particles[i].p[1];
 	z1 = model.particles[i].p[2];	
 	//printf("1:%le,%le,%le,%le\n",m1,x1,y1,z1);
+	// Superposicion de fuerzas
 	for (int j=0; j< model.i;j++){
 	  
 	  if (i!=j){
-	    m2 = model.particles[j].mass;
+	    q2 = model.particles[j].q;
 	    x2 = model.particles[j].p[0];
 	    y2 = model.particles[j].p[1];
 	    z2 = model.particles[j].p[2];
@@ -118,9 +123,10 @@ Model integrator_solve(Integrator integrator, Model model){
 	    r = R(x1,y1,z1,x2,y2,z2);
 	    //printf("\t\t r:%le\n",r);
 	    u = U(x1,y1,z1,x2,y2,z2);
-	    model.particles[i].v[0] += E1D(m2,r,u.x)*dt;
-	    model.particles[i].v[1] += E1D(m2,r,u.y)*dt;
-	    model.particles[i].v[2] += E1D(m2,r,u.z)*dt;
+	    // Integral numerica de Riemann
+	    model.particles[i].v[0] += E1D(q2,r,u.x)*dt*m1;
+	    model.particles[i].v[1] += E1D(q2,r,u.y)*dt*m1;
+	    model.particles[i].v[2] += E1D(q2,r,u.z)*dt*m1;
 	  }	  
 	}
 

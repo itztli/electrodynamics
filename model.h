@@ -20,6 +20,8 @@ extern "C" {
   }Model;
 
   Model new_Model(char *name, int N);
+
+  int close_Model(Model *model);
   
   void add_Particle_to_Model(Model *model, Particle particle);
 

@@ -19,7 +19,13 @@ Model new_Model(char *name, int N){
   model.backup_particles = malloc(sizeof(Particle)*N);
   return model;
 }
-  
+
+int close_Model(Model *model){
+  free(model->particles);
+  free(model->backup_particles);
+  return 1;
+}
+
 void add_Particle_to_Model(Model *model, Particle particle){
   if ((*model).i < (*model).N){
     //printf("adding particle to model\n");

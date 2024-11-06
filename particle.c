@@ -5,9 +5,10 @@
 #include <stdio.h>
 #include "particle.h"
 
-Particle new_Particle(int mass, double x, double y, double z, double vx, double vy, double vz){
+Particle new_Particle(double q, double m, double x, double y, double z, double vx, double vy, double vz){
   Particle particle;
-  particle.mass = mass;
+  particle.q = q;
+  particle.m = m;
   particle.p[0] = x;
   particle.p[1] = y;
   particle.p[2] = z;
@@ -18,5 +19,5 @@ Particle new_Particle(int mass, double x, double y, double z, double vx, double 
 }
 
 void print_Particle(Particle particle){
-  printf("%le\t%le\t%le\t%le\t%le\t%le\t%le\n",particle.mass, particle.p[0],particle.p[1],particle.p[2],particle.v[0],particle.v[1],particle.v[2]);
+  printf("%le\t%le\t%le\t%le\t%le\t%le\t%le\t%le\n",particle.q, particle.m,particle.p[0],particle.p[1],particle.p[2],particle.v[0],particle.v[1],particle.v[2]);
 }
